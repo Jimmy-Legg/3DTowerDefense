@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6758593698074381616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4908055715741099678}
+  - component: {fileID: 4126634019806206843}
+  - component: {fileID: 841874937434172638}
+  - component: {fileID: 5720704362780229042}
+  - component: {fileID: 5768317256569385296}
+  m_Layer: 0
+  m_Name: GameMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4908055715741099678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758593698074381616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 14.224999, y: 14.224999, z: 14.224999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4126634019806206843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758593698074381616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b669b989e9079de42a5bd505ff512802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 3959358881172908858, guid: e697cbc92639522469811024dddb0a0e, type: 3}
+  spawnPoint: {fileID: 0}
+  timeBetweenWaves: 30
+  waveCountDownText: {fileID: 0}
+  waves: {fileID: 0}
+  startWaveIndex: 0
+--- !u!114 &841874937434172638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758593698074381616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08786e8aa77023649beb09e911d4a7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  machineGunPreviewPrefab: {fileID: 5725103194236113399, guid: 87df44603fe0f744fa188a748f57fc6b, type: 3}
+  missileLauncherPreviewPrefab: {fileID: 3536942324762313058, guid: ccfe83feaccb7414098168d0243ea22d, type: 3}
+  laserGunPreviewPrefab: {fileID: 7777876283999909411, guid: f5c4cbec825b0f54c81c7adedcb24a0a, type: 3}
+  buildEffect: {fileID: 1927195468306236834, guid: 685530f468348224e86c2ad3d4f9bbe2, type: 3}
+--- !u!114 &5720704362780229042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758593698074381616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3a64b41805459498e5d1f9070b0286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  startMoney: 250
+  startHealth: 100
+--- !u!114 &5768317256569385296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758593698074381616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354347b5d72e4794a998e0f788526f56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 0}
