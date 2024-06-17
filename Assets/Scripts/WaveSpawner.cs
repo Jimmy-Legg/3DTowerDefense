@@ -32,7 +32,6 @@ public class WaveSpawner : MonoBehaviour
                 return;
             StartCoroutine(SpawnWave());
             countDown = timeBetweenWaves;
-            timeBetweenWaves += 0.5f;
         }else
         {
             countDown -= Time.deltaTime;

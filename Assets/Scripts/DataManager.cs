@@ -13,6 +13,7 @@ public class DataManager : MonoBehaviour
         public int HighScore;
 
         public bool MachineGunLvl2;
+
         public bool MissileLauncher;
         public bool MissileLauncherLvl2;
         public bool LaserGun;
@@ -23,14 +24,14 @@ public class DataManager : MonoBehaviour
         public bool MapLevel1Selected;
         public bool MapLevel2Selected;
 
-        public string DifficultySelected; 
-        public List<string> DifficultyList = new List<string> {"Easy" , "Easy+", "Normal", "Normal+", "Hard", "Hard+", "Insane", "Insane+", "Impossible", "Impossible+", "Hell", "Hell+", "Hell++", "Hell+++" };
-
+        public string DifficultySelected;
+        public List<string> DifficultyList;
         public List<string> DifficultyCompleted;
     }
 
     private static DataManager instance;
     private string filePath;
+    private MyData cachedData;
 
     private ErrorMessageDisplay errorMessageDisplay;
     private void Awake()
@@ -48,28 +49,38 @@ public class DataManager : MonoBehaviour
         filePath = Path.Combine(Application.persistentDataPath, "data.json");
 
         errorMessageDisplay = FindFirstObjectByType<ErrorMessageDisplay>();
+
+        if (errorMessageDisplay == null)
+        {
+            Debug.LogError("ErrorMessageDisplay not found in the scene.");
+        }
     }
+
 
     public void SaveData(MyData data)
     {
+        cachedData = data;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(filePath, json);
     }
 
     public MyData LoadData()
     {
-        if (File.Exists(filePath))
+        if (cachedData == null)
         {
-            string json = File.ReadAllText(filePath);
-            MyData data = JsonUtility.FromJson<MyData>(json);
-            return data;
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                cachedData = JsonUtility.FromJson<MyData>(json);
+            }
+            else
+            {
+                Debug.LogWarning("No saved data found.");
+                ResetData();
+                return null;
+            }
         }
-        else
-        {
-            Debug.LogWarning("No saved data found.");
-            ResetData();
-            return null;
-        }
+        return cachedData;
     }
 
     public bool BuyMissileLauncher()

@@ -27,19 +27,14 @@ public class UpgradeShop : MonoBehaviour
 
     [Header("Slider MachinGun")]
     public Slider machineGunLvl1Slider;
-    public Button machineGunLvl1BuyButton;
     public Slider machineGunLvl2Slider;
-    public Button machineGunLvl2BuyButton;
 
     [Header("Slider MissileLauncher")]
     public Slider missileLauncherLvl1Slider;
-    public Button missileLauncherLvl1BuyButton;
     public Slider missileLauncherLvl2Slider;
-    public Button missileLauncherLvl2BuyButton;
 
     [Header("Slider LaserGun")]
     public Slider laserGunLvl1Slider;
-    public Button laserGunLvl1BuyButton;
 
     [Header("Map Buttons")]
     public Button MapButtonlvl1;
@@ -61,9 +56,6 @@ public class UpgradeShop : MonoBehaviour
         turretData = turretDataManager.LoadData();
 
         InitializeSliders();
-
-        priceTooltip.SetActive(false);
-
 
         //if turret is buyed in data then change button text to selected
         if (data.MissileLauncher)
@@ -98,9 +90,10 @@ public class UpgradeShop : MonoBehaviour
 
     }
 
-    public void ShowPriceTooltip(string price)
+    public void ShowPriceTooltip(string price, Vector3 position)
     {
-        priceText.text = "Price: $" + price;
+        priceText.text = "$" + price;
+        priceTooltip.transform.position = position + new Vector3(0, 30, 0); ;
         priceTooltip.SetActive(true);
     }
 
@@ -126,26 +119,8 @@ public class UpgradeShop : MonoBehaviour
 
         laserGunLvl1Slider.maxValue = turretData.fireRateUpgradesLaserGunLvl1[turretData.fireRateUpgradesLaserGunLvl1.Length - 1];
         laserGunLvl1Slider.value = turretData.lastLaserGunLvl1FireRateBuyed;
-        MyData data = dataManager.LoadData();
-        if (data.MissileLauncher)
-        {
-            IsBuyed(MissileLauncherLvl1BuyButton);
-        }
 
-        if (data.LaserGun)
-        {
-            IsBuyed(LaserGunLvl1BuyButton);
-        }
-
-        if (data.MachineGunLvl2)
-        {
-            IsBuyed(MachineGunLvl2BuyButton);
-        }
-
-        if (data.MissileLauncherLvl2)
-        {
-            IsBuyed(MissileLauncherLvl2BuyButton);
-        }
+        
     }
 
     public void BuyMachineGunLvl2()
@@ -232,6 +207,8 @@ public class UpgradeShop : MonoBehaviour
 
         }
     }
+
+    // Upgrade turret fire rate methods
     public void UpgradeMachineGunLvl1()
     {
         int moneySpent = 50;
@@ -256,7 +233,7 @@ public class UpgradeShop : MonoBehaviour
     {
         if (!data.MissileLauncher)
             return;
-        int moneySpent = 300;
+        int moneySpent = 200;
 
         turretDataManager.UpgradeTurret("MissileLauncher", 1, moneySpent);
 
@@ -268,29 +245,21 @@ public class UpgradeShop : MonoBehaviour
     {
         if (!data.MissileLauncherLvl2)
             return;
-        int moneySpent = 600;
+        int moneySpent = 400;
 
         turretDataManager.UpgradeTurret("MissileLauncher", 2, moneySpent);
 
         UpdateSliders();
     }
 
-    public void UpgradeLaserGun()
-    {
-        if (!data.LaserGun)
-            return;
-        int moneySpent = 600;
-
-        turretDataManager.UpgradeTurret("LaserGun", 1, moneySpent);
-
-        UpdateSliders();
-    }
 
     public void Update()
     {
         moneyText.text = "Money: " + dataManager.LoadData().Money.ToString();
         data = dataManager.LoadData();
-        InitializeSliders();
+        UpdateSliders();
+
+
     }
 
     private void UpdateSliders()
@@ -306,6 +275,29 @@ public class UpgradeShop : MonoBehaviour
         missileLauncherLvl2Slider.value = turretData.lastMissileLauncherLvl2FireRateBuyed;
 
         laserGunLvl1Slider.value = turretData.lastLaserGunLvl1FireRateBuyed;
+
+        MyData data = dataManager.LoadData();
+
+        if (data.MissileLauncher)
+        {
+            IsBuyed(MissileLauncherLvl1BuyButton);
+        }
+
+        if (data.LaserGun)
+        {
+            IsBuyed(LaserGunLvl1BuyButton);
+        }
+
+        if (data.MachineGunLvl2)
+        {
+            IsBuyed(MachineGunLvl2BuyButton);
+        }
+
+        if (data.MissileLauncherLvl2)
+        {
+            IsBuyed(MissileLauncherLvl2BuyButton);
+        }
+
     }
 
     public void ResetData()

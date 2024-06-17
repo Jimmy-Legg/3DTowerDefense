@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameWinUI;
     private DataManager dataManager;
     private MyData data;
+    private AdManager adManager;
 
     private void Start()
     {
@@ -20,6 +21,14 @@ public class GameManager : MonoBehaviour
         GameIsWin = false;
         dataManager = (DataManager)FindFirstObjectByType(typeof(DataManager));
         data = dataManager.LoadData();
+
+        // Find the AdManager instance in the scene
+        adManager = FindObjectOfType<AdManager>();
+
+        if (adManager == null)
+        {
+            Debug.LogError("AdManager not found in the scene. Please add an AdManager script to a GameObject.");
+        }
     }
 
     private void Update()
@@ -34,7 +43,6 @@ public class GameManager : MonoBehaviour
         if (WaveSpawner.waveIndex >= 30 && !GameIsWin && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             WinGame();
-
         }
     }
 
@@ -61,5 +69,10 @@ public class GameManager : MonoBehaviour
     {
         GameIsOver = true;
         gameOverUI.SetActive(true);
+
+        if (adManager != null)
+        {
+            adManager.ShowInterstitialAd();
+        }
     }
 }
